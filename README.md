@@ -3,20 +3,29 @@
 Review preview of the SEIH website (Slovak Energy Investment Holding a.s.),
 served by GitHub Pages. Draft, not the live site.
 
-`index.html` is the whole site in one file (home, energy market, sitemap in
-English, Slovak and Simplified Chinese). It carries a noindex tag, so search
-engines do not list it.
+A plain static page: open `index.html` in a browser, no server or build
+needed. Home, energy market and sitemap in English, Slovak and Simplified
+Chinese. It carries a noindex tag, so search engines do not list it.
 
-Links: `#/en/home`, `#/sk/energy-market`, `#/zh/sitemap`.
+```
+index.html          all pages and languages
+assets/site.css     styles (Tailwind build) and font faces
+assets/app.js       page and language switching by URL hash
+assets/img/         photos, logos, icon
+assets/fonts/       Inter and Outfit
+```
+
+Links: `#/en/home`, `#/sk/energy-market`, `#/zh/sitemap`, `#/en/home/contact`.
 
 ## Update
 
-The file is generated from the `seih-web` repo:
+Generated from the `seih-web` repo (Next.js):
 
 ```bash
 cd ../seih-web
-npm run build:preview
-cp dist/netlify-preview/index.html ../seih-preview/index.html
+npm run build:site
+cp dist/site/index.html ../seih-preview/
+rm -rf ../seih-preview/assets && cp -r dist/site/assets ../seih-preview/
 cd ../seih-preview
-git commit -am "Update preview" && git push
+git add -A && git commit -m "Update preview" && git push
 ```
