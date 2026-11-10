@@ -10,18 +10,12 @@ if (typeof IMAGES !== "undefined") {
   });
 }
 
-function browserLang() {
-  const tags = navigator.languages || [navigator.language || "en"];
-  for (const tag of tags) {
-    const base = tag.toLowerCase().split("-")[0];
-    if (LANGS.includes(base)) return base;
-  }
-  return "en";
-}
+// English is the main language; Slovak and Chinese come from the switch.
+const DEFAULT_LANG = "en";
 
 function route() {
   const [lang, page, anchor] = location.hash.replace(/^#\/?/, "").split("/");
-  const key = `${LANGS.includes(lang) ? lang : browserLang()}/${PAGES.includes(page) ? page : "home"}`;
+  const key = `${LANGS.includes(lang) ? lang : DEFAULT_LANG}/${PAGES.includes(page) ? page : "home"}`;
   const view = document.querySelector(`[data-view="${key}"]`);
   const switched = key !== current;
 
